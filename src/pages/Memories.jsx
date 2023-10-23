@@ -2,15 +2,28 @@ import { useEffect, useState } from 'react'
 import MemoryCard from '../components/MemoryCard'
 import { getMemories } from '../api/memories'
 import EmptyState from '../components/EmptyState'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 const Memories = () => {
+  const [isLoading, setIsLoading] = useState(false)
   const [memories, setMemories] = useState([])
   const fetchMemories = () => {
-    getMemories().then(data => setMemories(data))
+    getMemories().then(data => {
+      setMemories(data)
+      setIsLoading(false)
+    })
   }
   useEffect(() => {
+    setIsLoading(true)
     fetchMemories()
   }, [])
+
+  if (isLoading)
+    return (
+      <div className='flex justify-center items-center pt-[18%]'>
+        <LoadingSpinner />
+      </div>
+    )
 
   if (memories.length === 0)
     return (
