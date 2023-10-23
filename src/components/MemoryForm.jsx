@@ -2,25 +2,28 @@ import { useState } from 'react'
 import { addMemories } from '../api/memories'
 import memoryJPG from '../assets/memory.jpg'
 import toast from 'react-hot-toast'
+import { useMutation } from '@tanstack/react-query'
 
 const MemoryForm = () => {
   const [formValue, setFormValue] = useState({
     title: '',
     description: '',
   })
-  const handleSubmit = e => {
-    e.preventDefault()
 
-    addMemories(formValue)
-      .then(data => {
-        toast.success('Memory Saved🔥')
-        setFormValue({ title: '', description: '' })
-        console.log(data)
-      })
-      .catch(err => {
-        toast.error('Something went wrong! Try again😰')
-        console.log(err)
-      })
+  const { mutateAsync: addMemoryMutation } = useMutation({
+    mutationFn: addMemories,
+  })
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    try {
+      await addMemoryMutation(formValue)
+      toast.success('Memory Saved🔥')
+      setFormValue({ title: '', description: '' })
+    } catch (err) {
+      toast.error('Something went wrong! Try again😰')
+      console.log(err)
+    }
   }
   return (
     <div className='flex flex-wrap w-full'>

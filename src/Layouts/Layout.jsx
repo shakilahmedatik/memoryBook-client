@@ -3,7 +3,6 @@ import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 
 const Layout = () => {
-  console.log(import.meta.env.VITE_API_URL)
   return (
     <>
       <Nav />
