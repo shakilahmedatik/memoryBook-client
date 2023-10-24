@@ -1,3 +1,4 @@
+// Get all memories
 export const getMemories = async () => {
   const response = await fetch(`${import.meta.env.VITE_API_URL}/memories`)
   const data = await response.json()
