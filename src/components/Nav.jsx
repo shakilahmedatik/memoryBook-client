@@ -3,7 +3,11 @@ import { Link, NavLink } from 'react-router-dom'
 
 const Nav = () => {
   const [theme, setTheme] = useState(
-    localStorage.getItem('theme') ? localStorage.getItem('theme') : 'wireframe'
+    localStorage.getItem('theme')
+      ? localStorage.getItem('theme')
+      : window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'night'
+      : 'wireframe'
   )
 
   // update state on toggle
@@ -17,9 +21,20 @@ const Nav = () => {
 
   // set theme state in localStorage on mount & also update localStorage on state change
   useEffect(() => {
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', ({ matches }) => {
+        if (matches) {
+          setTheme('night')
+        } else {
+          setTheme('wireframe')
+        }
+      })
+
     localStorage.setItem('theme', theme)
     const localTheme = localStorage.getItem('theme')
     // add custom data-theme attribute to html tag required to update theme using DaisyUI
+
     document.querySelector('html').setAttribute('data-theme', localTheme)
   }, [theme])
   return (
