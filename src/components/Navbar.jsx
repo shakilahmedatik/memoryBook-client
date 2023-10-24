@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 // assets
-import logo from '../assets/logo.png'
+
 const themes = [
   'light',
   'dark',
@@ -49,7 +49,7 @@ const Navbar = () => {
   return (
     <div className='navbar bg-base-100 shadow-lg px-4 sm:px-8'>
       <div className='flex-1'>
-        <img src={logo} alt='OM' className='btn btn-ghost p-0' />
+        <h1>memoryBook</h1>
         <h1 className='text-lg font-bold mx-4'>Theme Toggler</h1>
       </div>
       <div className='flex-none'>
