@@ -20,6 +20,15 @@ const Nav = () => {
     localStorage.setItem('theme', theme)
     const localTheme = localStorage.getItem('theme')
     // add custom data-theme attribute to html tag required to update theme using DaisyUI
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', ({ matches }) => {
+        if (matches) {
+          setTheme('night')
+        } else {
+          setTheme('wireframe')
+        }
+      })
     document.querySelector('html').setAttribute('data-theme', localTheme)
   }, [theme])
   return (
