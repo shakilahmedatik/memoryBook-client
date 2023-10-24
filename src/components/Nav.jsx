@@ -17,9 +17,6 @@ const Nav = () => {
 
   // set theme state in localStorage on mount & also update localStorage on state change
   useEffect(() => {
-    localStorage.setItem('theme', theme)
-    const localTheme = localStorage.getItem('theme')
-    // add custom data-theme attribute to html tag required to update theme using DaisyUI
     window
       .matchMedia('(prefers-color-scheme: dark)')
       .addEventListener('change', ({ matches }) => {
@@ -29,6 +26,10 @@ const Nav = () => {
           setTheme('wireframe')
         }
       })
+    localStorage.setItem('theme', theme)
+    const localTheme = localStorage.getItem('theme')
+    // add custom data-theme attribute to html tag required to update theme using DaisyUI
+
     document.querySelector('html').setAttribute('data-theme', localTheme)
   }, [theme])
   return (
