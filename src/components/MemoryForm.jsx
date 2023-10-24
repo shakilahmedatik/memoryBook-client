@@ -2,8 +2,10 @@ import { useState } from 'react'
 import { addMemories } from '../api/memories'
 import memoryJPG from '../assets/memory.jpg'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 const MemoryForm = () => {
+  const navigate = useNavigate()
   const [formValue, setFormValue] = useState({
     title: '',
     description: '',
@@ -16,6 +18,7 @@ const MemoryForm = () => {
         toast.success('Memory Saved🔥')
         setFormValue({ title: '', description: '' })
         console.log(data)
+        navigate('/memories')
       })
       .catch(err => {
         toast.error('Something went wrong! Try again😰')
