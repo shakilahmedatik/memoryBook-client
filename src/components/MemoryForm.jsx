@@ -2,9 +2,12 @@ import { useState } from 'react'
 import { addMemories } from '../api/memories'
 import memoryJPG from '../assets/memory.jpg'
 import toast from 'react-hot-toast'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useNavigate } from 'react-router-dom'
 
 const MemoryForm = () => {
+  const queryClient = useQueryClient()
+  const navigate = useNavigate()
   const [formValue, setFormValue] = useState({
     title: '',
     description: '',
@@ -12,6 +15,9 @@ const MemoryForm = () => {
 
   const { mutateAsync: addMemoryMutation } = useMutation({
     mutationFn: addMemories,
+    onSuccess: () => {
+      queryClient.invalidateQueries('memories')
+    },
   })
 
   const handleSubmit = async e => {
@@ -20,6 +26,7 @@ const MemoryForm = () => {
       await addMemoryMutation(formValue)
       toast.success('Memory Saved🔥')
       setFormValue({ title: '', description: '' })
+      navigate('/memories')
     } catch (err) {
       toast.error('Something went wrong! Try again😰')
       console.log(err)
