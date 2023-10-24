@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import MemoryCard from '../components/MemoryCard'
 import { getMemories } from '../api/memories'
+import MemoryCard from '../components/MemoryCard'
 import EmptyState from '../components/EmptyState'
 import LoadingSpinner from '../components/LoadingSpinner'
 

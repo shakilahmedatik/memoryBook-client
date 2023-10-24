@@ -12,7 +12,8 @@ const MemoryForm = () => {
   })
   const handleSubmit = e => {
     e.preventDefault()
-
+    if (formValue.description.length < 34)
+      return toast.error('Description is too short😰')
     addMemories(formValue)
       .then(data => {
         toast.success('Memory Saved🔥')
