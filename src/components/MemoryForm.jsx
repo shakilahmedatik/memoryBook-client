@@ -23,6 +23,8 @@ const MemoryForm = () => {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
+      if (formValue.description.length < 34)
+        return toast.error('Description is too short😰')
       await addMemoryMutation(formValue)
       toast.success('Memory Saved🔥')
       setFormValue({ title: '', description: '' })
