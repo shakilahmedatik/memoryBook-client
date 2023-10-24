@@ -1,7 +1,7 @@
-# DaisyUI Theme Toggler
+# MemoryBook
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A very simple app for storing your precious memories.
 
 Deployed in Netlify:
 
-- [Live Link](https://daisyui-theme-toggler.netlify.app)
+- [Live Link](https://memory-book-web.netlify.app/)
